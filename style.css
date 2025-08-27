@@ -1,0 +1,105 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    padding: 2em 0;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+main {
+    padding: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 2em;
+    padding: 1.5em;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #3498db;
+    margin-bottom: 0.8em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5em;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0.5em;
+    transition: color 0.3s ease;
+}
+
+li:hover {
+    color: #3498db;
+}
+
+.join-button {
+    display: inline-block;
+    background-color: #218c5f;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.join-button:hover {
+    background-color: #196b48;
+}
+
+#chartdiv {
+    width: 100%;
+    height: 500px;
+    margin-top: 1em;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 1em 0;
+    background-color: #ddd;
+    font-size: 0.9em;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    section {
+        padding: 1em;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+}
