@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiwi Nest - A Discord Community</title>
+
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- amCharts for the growth chart -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Dark.js"></script>
+
+    <style>
+      /* Use the Inter font family */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #111827; /* Dark background */
+      }
+    </style>
+  </head>
+  <body class="text-gray-200">
+    <div class="container mx-auto px-6 py-12">
+      <!-- Header Section -->
+      <header class="text-center mb-16">
+        <div
+          class="w-24 h-24 mx-auto mb-6 rounded-full bg-emerald-500/20 flex items-center justify-center"
+        >
+          <img
+            src="https://cdn.discordapp.com/icons/1328629578096316427/877badba1ad461337949abab2f3942d0.jpg"
+          />
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3">
+          Welcome to the <span class="text-emerald-400">Kiwi Nest</span>
+        </h1>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+          We're a vibrant and growing community for the amazing people of
+          Aotearoa!
+        </p>
+        <a
+          href="https://discord.gg/2YHBeGakuv"
+          target="_blank"
+          rel="noopener"
+          class="mt-8 inline-block bg-emerald-500 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:bg-emerald-600 transition-transform transform hover:scale-105"
+        >
+          Join the Server!
+        </a>
+      </header>
+
+      <!-- Main Content -->
+      <main>
+        <!-- Features Section -->
+        <section id="features" class="mb-16">
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Feature Card 1 -->
+            <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+              <h3 class="font-bold text-xl text-white mb-2">
+                Active Community
+              </h3>
+              <p class="text-gray-400">
+                 🌟 Welcoming NZ Community – Meet and connect with fellow Kiwis! 
+                <br/ >
+                🫂We offer channels for specific games, art sharing, and voice
+                chat.
+              </p>
+            </div>
+            <!-- Feature Card 2 -->
+            <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+              <h3 class="font-bold text-xl text-white mb-2">Custom Features</h3>
+              <p class="text-gray-400">
+                🔥 [KIWI] Tag! Join to use!
+                <br />
+                💰 Server Currency – Earn, spend, and enjoy fun rewards! 🤑
+              </p>
+            </div>
+            <!-- Feature Card 3 -->
+            <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+              <h3 class="font-bold text-xl text-white mb-2">And More</h3>
+              <p class="text-gray-400">
+                 We’d love to have you join our Kiwi whānau! ❤️
+                <br/ >
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Server Growth Chart Section -->
+        <section id="chart-section">
+          <h2 class="text-3xl font-bold text-center text-white mb-2">
+            Member Count
+          </h2>
+          <p class="text-center text-gray-400 mb-8">
+            Watch our community grow over time!
+          </p>
+          <div
+            class="bg-gray-800/50 p-4 rounded-xl border border-gray-700 min-h-[500px] flex items-center justify-center"
+          >
+            <!-- This div will contain the chart or a loading message -->
+            <div id="chartdiv" class="w-full h-[500px]">
+              <!-- Loading State -->
+              <div
+                id="loading"
+                class="flex flex-col items-center justify-center h-full"
+              >
+                <svg
+                  class="animate-spin h-8 w-8 text-emerald-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                <p class="mt-4 text-gray-400">Loading member data...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="text-center mt-16">
+        <p class="text-gray-500">&copy; 2025 Kiwi Nest. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <!-- Charting Logic -->
+    <script>
+      am5.ready(function () {
+        // --- Basic Setup ---
+        const chartDiv = document.getElementById("chartdiv");
+        const loadingDiv = document.getElementById("loading");
+        const root = am5.Root.new(chartDiv);
+
+        // Set themes (including the Dark theme from your original code)
+        root.setThemes([
+          am5themes_Animated.new(root),
+          am5themes_Dark.new(root),
+        ]);
+
+        // --- Main Chart Creation ---
+        const chart = root.container.children.push(
+          am5xy.XYChart.new(root, {
+            panX: true,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+            pinchZoomX: true,
+            paddingLeft: 0,
+          }),
+        );
+
+        // --- Cursor Setup ---
+        // Add a cursor for interactivity
+        const cursor = chart.set(
+          "cursor",
+          am5xy.XYCursor.new(root, {
+            behavior: "zoomX",
+            lineY: { visible: true },
+            lineX: { visible: true },
+          }),
+        );
+
+        // --- Axes for the Main Chart ---
+        const xAxis = chart.xAxes.push(
+          am5xy.DateAxis.new(root, {
+            baseInterval: { timeUnit: "hour", count: 1 },
+            renderer: am5xy.AxisRendererX.new(root, {
+              minorGridEnabled: true,
+              minGridDistance: 80,
+            }),
+            tooltip: am5.Tooltip.new(root, {}),
+          }),
+        );
+
+        const yAxis = chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            renderer: am5xy.AxisRendererY.new(root, {}),
+          }),
+        );
+
+        // --- Series for the Main Chart ---
+        const series = chart.series.push(
+          am5xy.LineSeries.new(root, {
+            name: "Members",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "value",
+            valueXField: "date",
+            stroke: am5.color(0x10b981), // emerald color
+            fill: am5.color(0x10b981), // for better hover
+            tooltip: am5.Tooltip.new(root, {
+              labelText:
+                "{valueX.formatDate('MMM dd, yyyy HH:mm')}: [bold]{valueY}[/] members",
+              dy: -5,
+            }),
+          }),
+        );
+
+        // Configure the fill for better tooltip triggering
+        series.fills.template.setAll({
+          fillOpacity: 0.1,
+          visible: true,
+        });
+
+        // --- Scrollbar Creation ---
+        // This is the major new addition
+        const scrollbar = chart.set(
+          "scrollbarX",
+          am5xy.XYChartScrollbar.new(root, {
+            orientation: "horizontal",
+            height: 60,
+          }),
+        );
+
+        // --- Scrollbar's Internal Chart ---
+        const sbDateAxis = scrollbar.chart.xAxes.push(
+          am5xy.DateAxis.new(root, {
+            baseInterval: { timeUnit: "day", count: 1 },
+            renderer: am5xy.AxisRendererX.new(root, {
+              minorGridEnabled: true,
+              minGridDistance: 70,
+            }),
+          }),
+        );
+
+        const sbValueAxis = scrollbar.chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            renderer: am5xy.AxisRendererY.new(root, {}),
+          }),
+        );
+
+        const sbSeries = scrollbar.chart.series.push(
+          am5xy.LineSeries.new(root, {
+            valueYField: "value",
+            valueXField: "date",
+            xAxis: sbDateAxis,
+            yAxis: sbValueAxis,
+          }),
+        );
+
+        // --- Data Fetching and Processing ---
+        fetch("/counts.json")
+          .then((res) => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+          })
+          .then((data) => {
+            loadingDiv.style.display = "none"; // Hide loading indicator
+
+            // Process dates
+            data.forEach(function (item) {
+              item.date = new Date(item.date).getTime();
+            });
+
+            // Set data for BOTH the main series AND the scrollbar series
+            series.data.setAll(data);
+            sbSeries.data.setAll(data);
+          })
+          .catch((error) => {
+            console.error("Failed to load chart data:", error);
+            loadingDiv.innerHTML = `<p class="text-red-400">Could not load server data. Please try again later.</p>`;
+          });
+
+        // --- Animations ---
+        series.appear(1000);
+        chart.appear(1000, 100);
+      });
+    </script>
+  </body>
+</html>
